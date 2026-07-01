@@ -1,0 +1,3 @@
+[submodule "android_plugin/core"]
+	path = android_plugin/core
+	url = https://github.com/AbyssMoth/android-vpn-detector-core

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    VpnDetectorPlugin AndroidManifest (Godot-обёртка).
+    Разрешения:
+    - ACCESS_NETWORK_STATE  обязательно для ConnectivityManager.getNetworkCapabilities().
+    - INTERNET              нужно хост-приложению; продублировано для ясности.
+
+    meta-data регистрирует Godot Android plugin v2 с синглтоном VpnDetector.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application>
+        <meta-data
+            android:name="org.godotengine.plugin.v2.VpnDetector"
+            android:value="com.abyssmoth.vpndetector.VpnDetectorPlugin" />
+    </application>
+
+</manifest>

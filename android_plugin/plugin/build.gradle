@@ -1,0 +1,31 @@
+plugins {
+    id "com.android.library"
+}
+
+android {
+    namespace "com.abyssmoth.vpndetector"
+    compileSdk 36
+
+    defaultConfig {
+        minSdk 23
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // Ядро подключено submodule'ом в ../core и компилируется прямо в этот AAR,
+    // поэтому итоговый .aar самодостаточен (отдельный core-AAR не нужен).
+    sourceSets {
+        main {
+            java.srcDirs += ["../core/vpndetectorcore/src/main/java"]
+        }
+    }
+}
+
+dependencies {
+    // Godot предоставляется движком в рантайме, в AAR не встраивается.
+    compileOnly "org.godotengine:godot:4.6.2.stable"
+}

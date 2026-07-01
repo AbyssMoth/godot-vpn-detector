@@ -66,17 +66,30 @@ vpn_status_changed(is_vpn_active: bool, has_internet: bool)
 
 Шлётся только при реальном изменении состояния (rising/falling edge).
 
-## Пересборка AAR
+## Сборка AAR
 
-AAR предсобран и лежит в `bin/`. Пересобрать (после правок ядра или обёртки):
+Готовый `.aar` уже лежит в `bin/vpn-detector-release.aar` (самодостаточный: содержит и
+обёртку, и ядро). Пересобирать нужно только после правок исходников. Три способа:
 
-```bash
-./build_aar.sh
-```
+1. **Двойной клик** (одна кнопка):
+   - macOS: `build_aar.command`
+   - Windows: `build_aar.bat`
+   - Linux/macOS из терминала: `./build_aar.sh`
+2. **Авто при экспорте**: если рядом есть исходники ядра (submodule `android_plugin/core`)
+   и они новее `.aar`, плагин пересоберёт его сам во время Android-экспорта. При установке
+   через zip-менеджер (submodule отсутствует) авто-пересборка не срабатывает и берётся
+   готовый `.aar` - это безопасно.
+3. **Вручную**:
+   ```bash
+   cd android_plugin
+   gradle clean :plugin:assembleRelease --no-daemon
+   cp plugin/build/outputs/aar/plugin-release.aar ../bin/vpn-detector-release.aar
+   ```
 
-Требует Android SDK, JDK 17-22 (Gradle 8.14.x не поддерживает JDK 25; на macOS рабочий
-вариант JDK 22), AGP 8.13.0, compileSdk 36, minSdk 23. Скрипт сам подтянет submodule
-ядра, если он не инициализирован.
+Требования: Android SDK (`ANDROID_HOME`), JDK 17+ (рекомендуется 17-22; собирается и на
+новых, но на старых Gradle бывают несовместимости), AGP 8.13.0, compileSdk 36, minSdk 23.
+Скрипты сами подтянут submodule ядра, если он не инициализирован. Готовый `.aar` в репо -
+это фолбэк, чтобы аддон работал сразу без сборки.
 
 ## Ограничение платформы
 

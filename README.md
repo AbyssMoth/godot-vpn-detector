@@ -82,12 +82,12 @@ vpn_status_changed(is_vpn_active: bool, has_internet: bool)
 3. **Вручную**:
    ```bash
    cd android_plugin
-   gradle clean :plugin:assembleRelease --no-daemon
+   ./gradlew clean :plugin:assembleRelease --no-daemon
    cp plugin/build/outputs/aar/plugin-release.aar ../bin/vpn-detector-release.aar
    ```
 
 Требования: Android SDK (`ANDROID_HOME`), JDK 17+ (рекомендуется 17-22; собирается и на
-новых, но на старых Gradle бывают несовместимости), AGP 8.13.0, compileSdk 36, minSdk 23.
+новых, но на старых Gradle бывают несовместимости), Godot Android API 4.7.2, AGP 8.9.1, compileSdk 36, minSdk 23. Репозиторий содержит Gradle wrapper 8.13; используйте `./gradlew`, чтобы сборка не зависела от глобальной версии Gradle.
 Скрипты сами подтянут submodule ядра, если он не инициализирован. Готовый `.aar` в репо -
 это фолбэк, чтобы аддон работал сразу без сборки.
 
